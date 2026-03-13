@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dailyify - Help / Ajuda</title>
+</head>
+<body>
+  <main>
+    <nav>
+      <p>
+        <a href="index.html">Index</a> |
+        <a href="terms.html">Terms</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="data-deletion.html">Data Deletion</a> |
+        <a href="support-policy.html">Support Policy</a> |
+        <a href="help.html">Help</a>
+      </p>
+    </nav>
+
+    <section lang="pt-BR">
+      <h1>Ajuda - Dailyify</h1>
+      <p><strong>Última atualização:</strong> 11 de março de 2026</p>
+
+      <h2>Visão geral</h2>
+      <p>
+        O Dailyify é um complemento do Google Agenda para organizar ordem de fala em reuniões recorrentes
+        (como daily). Ele lê os convidados do evento, monta uma ordem de participação e atualiza uma pontuação
+        por pessoa para equilibrar quem começa ao longo dos dias.
+      </p>
+
+      <h2>Como o app funciona (alto nível)</h2>
+      <ul>
+        <li>Quando você abre um evento no Google Agenda, o Dailyify processa os participantes válidos.</li>
+        <li>E-mails de grupo podem ser expandidos para membros individuais quando disponível no domínio.</li>
+        <li>A ordem do dia é gerada com base na pontuação (menor pontuação tende a falar primeiro).</li>
+        <li>No primeiro uso da reunião (ou randomização forçada), a ordem inicial é embaralhada.</li>
+        <li>Após gerar a ordem, o app atualiza score por posição e pode adicionar +1 ponto aleatório (entropia).</li>
+        <li>Pontuações acima de 100 voltam para 0.</li>
+        <li>A ordem do dia pode ser reaproveitada no mesmo dia, evitando mudanças inesperadas.</li>
+      </ul>
+
+      <h2>Quando usar</h2>
+      <ul>
+        <li>Daily/stand-up com equipe fixa ou semi-fixa.</li>
+        <li>Reuniões recorrentes em que você quer equilibrar quem começa.</li>
+        <li>Times que querem reduzir discussão manual sobre ordem de fala.</li>
+      </ul>
+
+      <h2>Quando evitar</h2>
+      <ul>
+        <li>Reuniões não recorrentes sem necessidade de rotação.</li>
+        <li>Cenários em que a ordem precisa ser sempre manual e fixa.</li>
+        <li>Fluxos que dependem de regras de prioridade externas não representadas por score.</li>
+      </ul>
+
+      <h2>Como usar (passo a passo)</h2>
+      <ol>
+        <li>Abra um evento de reunião no Google Agenda.</li>
+        <li>No painel do Dailyify, veja a seção <strong>Ordem de Hoje</strong>.</li>
+        <li>Se necessário, mova pessoas para <strong>Opcional/Assistentes</strong> em <strong>Configurações & Ações</strong>.</li>
+        <li>Use <strong>Simular Próximo Dia</strong> para testar nova ordem por score.</li>
+        <li>Use <strong>Forçar Randomização</strong> para reembaralhar.</li>
+        <li>Use <strong>Zerar Scores</strong>, <strong>Limpar Dados da Reunião</strong> ou <strong>Flush Global</strong> somente quando necessário.</li>
+      </ol>
+
+      <h2>Dados e estado</h2>
+      <p>
+        O estado operacional (pontuação, exclusões e ordem por dia) é salvo em UserProperties do Apps Script
+        na conta do usuário. O app também usa cache para informações de grupo e de usuário (nome/foto)
+        para reduzir chamadas de API.
+      </p>
+
+      <h2>Suporte</h2>
+      <p>
+        Suporte por e-mail: <strong>dailyify@decastro.me</strong>
+      </p>
+    </section>
+
+    <hr>
+
+    <section lang="en">
+      <h1>Help - Dailyify</h1>
+      <p><strong>Last updated:</strong> March 11, 2026</p>
+
+      <h2>Overview</h2>
+      <p>
+        Dailyify is a Google Calendar add-on that organizes speaking order in recurring meetings
+        (such as daily stand-ups). It reads event guests, builds a participation order, and updates
+        a per-person score to balance who starts over time.
+      </p>
+
+      <h2>How the app works (high level)</h2>
+      <ul>
+        <li>When you open a Google Calendar event, Dailyify processes valid participants.</li>
+        <li>Group emails can be expanded into individual members when available in your domain.</li>
+        <li>The daily order is generated using score (lower score tends to speak first).</li>
+        <li>On first run for a meeting (or forced randomization), the initial order is shuffled.</li>
+        <li>After generating the order, the app updates score by position and may add a random +1 point (entropy).</li>
+        <li>Scores above 100 are reset to 0.</li>
+        <li>The order can be reused on the same day to avoid unexpected changes.</li>
+      </ul>
+
+      <h2>When to use</h2>
+      <ul>
+        <li>Daily/stand-up meetings with a fixed or semi-fixed team.</li>
+        <li>Recurring meetings where you want balanced opening turns.</li>
+        <li>Teams that want to avoid manual discussion about speaking order.</li>
+      </ul>
+
+      <h2>When not to use</h2>
+      <ul>
+        <li>Non-recurring meetings with no need for rotation.</li>
+        <li>Scenarios where order must always be manually fixed.</li>
+        <li>Flows that depend on external priority rules not represented by score.</li>
+      </ul>
+
+      <h2>How to use (step by step)</h2>
+      <ol>
+        <li>Open a meeting event in Google Calendar.</li>
+        <li>In the Dailyify panel, check <strong>Today’s Order</strong>.</li>
+        <li>If needed, move people to <strong>Optional/Assistants</strong> in <strong>Settings & Actions</strong>.</li>
+        <li>Use <strong>Simulate Next Day</strong> to test a score-based new order.</li>
+        <li>Use <strong>Force Randomization</strong> to reshuffle.</li>
+        <li>Use <strong>Reset Scores</strong>, <strong>Clear Meeting Data</strong>, or <strong>Global Flush</strong> only when needed.</li>
+      </ol>
+
+      <h2>Data and state</h2>
+      <p>
+        Operational state (scores, exclusions, and daily order) is saved in Apps Script UserProperties
+        under the user account. The app also uses cache for group and user info (name/photo)
+        to reduce API calls.
+      </p>
+
+      <h2>Support</h2>
+      <p>
+        Email-only support: <strong>dailyify@decastro.me</strong>
+      </p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "timeZone": "America/Sao_Paulo",
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "AdminDirectory",
+        "serviceId": "admin",
+        "version": "directory_v1"
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/userinfo.email", //get the user's email to identify them in the add-on
+    "https://www.googleapis.com/auth/userinfo.profile", //get the user's profile picture to display in the add-on
+    "https://www.googleapis.com/auth/calendar.readonly", //readonly access to Calendar
+    "https://www.googleapis.com/auth/calendar.addons.execute", //execute add-on functions in Calendar
+    "https://www.googleapis.com/auth/script.locale", //access the user's locale to get current date and time
+    "https://www.googleapis.com/auth/groups", //access groups to unpack group email addresses
+    "https://www.googleapis.com/auth/admin.directory.group.readonly",//readonly access to Groups
+    "https://www.googleapis.com/auth/admin.directory.user.readonly"//read usernames and avatars to display in the add-on
+  ],
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "name": "Dailyify",
+      "logoUrl": "https://sparkling-bar-6580.guilycst.workers.dev",
+      "useLocaleFromApp": true
+    },
+    "calendar": {
+      "homepageTrigger": {
+        "runFunction": "onHomepage"
+      },
+      "eventOpenTrigger": {
+        "runFunction": "onEventOpen"
+      }
+    }
+  }
+}
