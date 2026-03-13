@@ -1,142 +1,211 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="modern">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dailyify - Help / Ajuda</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajuda - Dailyify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="module" src="/main.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-  <main>
-    <nav>
-      <p>
-        <a href="index.html">Index</a> |
-        <a href="terms.html">Terms</a> |
-        <a href="privacy.html">Privacy</a> |
-        <a href="data-deletion.html">Data Deletion</a> |
-        <a href="support-policy.html">Support Policy</a> |
-        <a href="help.html">Help</a>
-      </p>
-    </nav>
+<body class="bg-neutral-50 text-neutral-900 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/" class="flex items-center gap-2">
+            <span class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-sm">D</span>
+            </span>
+            <span class="text-xl font-bold text-primary-600">Dailyify</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1 bg-neutral-100 rounded-full p-1" x-data="{ 
+            lang: new URLSearchParams(window.location.search).get('lang') || 'pt',
+            updateUrl() {
+              const url = new URL(window.location);
+              if (this.lang === 'pt') url.searchParams.delete('lang');
+              else url.searchParams.set('lang', this.lang);
+              window.location = url.toString();
+            }
+          }">
+            <button @click="lang = 'pt'; updateUrl()" :class="lang === 'pt' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-600'" class="px-3 py-1.5 rounded-full text-sm font-medium">PT</button>
+            <button @click="lang = 'en'; updateUrl()" :class="lang === 'en' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-600'" class="px-3 py-1.5 rounded-full text-sm font-medium">EN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-    <section lang="pt-BR">
-      <h1>Ajuda - Dailyify</h1>
-      <p><strong>Última atualização:</strong> 11 de março de 2026</p>
+  <!-- Breadcrumb -->
+  <div class="bg-neutral-100 border-b border-neutral-200">
+    <div class="max-w-4xl mx-auto px-4 py-3">
+      <nav class="flex items-center gap-2 text-sm">
+        <a href="/" class="text-primary-600 hover:text-primary-700" x-text="lang === 'en' ? 'Home' : 'Início'"></a>
+        <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-neutral-600" x-text="lang === 'en' ? 'Help' : 'Ajuda'"></span>
+      </nav>
+    </div>
+  </div>
 
-      <h2>Visão geral</h2>
-      <p>
-        O Dailyify é um complemento do Google Agenda para organizar ordem de fala em reuniões recorrentes
-        (como daily). Ele lê os convidados do evento, monta uma ordem de participação e atualiza uma pontuação
-        por pessoa para equilibrar quem começa ao longo dos dias.
-      </p>
+  <!-- Content -->
+  <main class="flex-grow py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-2xl border border-neutral-200 shadow-sm p-8">
+        
+        <!-- Portuguese -->
+        <div x-show="!lang || lang === 'pt'">
+          <h1 class="text-3xl font-bold text-neutral-900 mb-2">Ajuda</h1>
+          <p class="text-neutral-600 mb-8">Última atualização: Março 2026</p>
 
-      <h2>Como o app funciona (alto nível)</h2>
-      <ul>
-        <li>Quando você abre um evento no Google Agenda, o Dailyify processa os participantes válidos.</li>
-        <li>E-mails de grupo podem ser expandidos para membros individuais quando disponível no domínio.</li>
-        <li>A ordem do dia é gerada com base na pontuação (menor pontuação tende a falar primeiro).</li>
-        <li>No primeiro uso da reunião (ou randomização forçada), a ordem inicial é embaralhada.</li>
-        <li>Após gerar a ordem, o app atualiza score por posição e pode adicionar +1 ponto aleatório (entropia).</li>
-        <li>Pontuações acima de 100 voltam para 0.</li>
-        <li>A ordem do dia pode ser reaproveitada no mesmo dia, evitando mudanças inesperadas.</li>
-      </ul>
+          <div class="space-y-8">
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Visão geral
+              </h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O Dailyify é um aplicativo do Google Workspace para organizar suas tarefas diárias. 
+                Ele ajuda você a criar, gerenciar e acompanhar suas tarefas com lembretes automáticos 
+                e sincronização com o Google Calendar™.
+              </p>
+            </section>
 
-      <h2>Quando usar</h2>
-      <ul>
-        <li>Daily/stand-up com equipe fixa ou semi-fixa.</li>
-        <li>Reuniões recorrentes em que você quer equilibrar quem começa.</li>
-        <li>Times que querem reduzir discussão manual sobre ordem de fala.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                Como usar
+              </h2>
+              <ol class="list-decimal list-inside text-neutral-700 space-y-3">
+                <li>Instale o Dailyify pelo Google Workspace Marketplace</li>
+                <li>Abra o aplicativo a partir do menu de complementos no Google Calendar™</li>
+                <li>Crie suas tarefas diárias</li>
+                <li>Defina lembretes e datas de vencimento</li>
+                <li>Receba notificações e mantenha-se organizado</li>
+              </ol>
+            </section>
 
-      <h2>Quando evitar</h2>
-      <ul>
-        <li>Reuniões não recorrentes sem necessidade de rotação.</li>
-        <li>Cenários em que a ordem precisa ser sempre manual e fixa.</li>
-        <li>Fluxos que dependem de regras de prioridade externas não representadas por score.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Precisa de ajuda?
+              </h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Se você tiver dúvidas ou precisar de suporte, entre em contato conosco.
+              </p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-4 bg-primary-50 border border-primary-200 rounded-xl">
+                  <h3 class="font-medium text-primary-900 mb-2">Email de Suporte</h3>
+                  <p class="text-primary-700">suporte@dailyify.app</p>
+                </div>
+                <div class="p-4 bg-neutral-50 border border-neutral-200 rounded-xl">
+                  <h3 class="font-medium text-neutral-900 mb-2">Disponibilidade</h3>
+                  <p class="text-neutral-700">Segunda a sexta, 9h-18h (BRT)</p>
+                </div>
+              </div>
+            </section>
 
-      <h2>Como usar (passo a passo)</h2>
-      <ol>
-        <li>Abra um evento de reunião no Google Agenda.</li>
-        <li>No painel do Dailyify, veja a seção <strong>Ordem de Hoje</strong>.</li>
-        <li>Se necessário, mova pessoas para <strong>Opcional/Assistentes</strong> em <strong>Configurações & Ações</strong>.</li>
-        <li>Use <strong>Simular Próximo Dia</strong> para testar nova ordem por score.</li>
-        <li>Use <strong>Forçar Randomização</strong> para reembaralhar.</li>
-        <li>Use <strong>Zerar Scores</strong>, <strong>Limpar Dados da Reunião</strong> ou <strong>Flush Global</strong> somente quando necessário.</li>
-      </ol>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Instalar o App
+              </h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Para começar a usar o Dailyify, instale-o pelo Google Workspace Marketplace.
+              </p>
+              <a href="https://workspace.google.com/marketplace/app/dailyify" target="_blank" 
+                 class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors">
+                <span>Instalar no Google Workspace</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </section>
+          </div>
+        </div>
 
-      <h2>Dados e estado</h2>
-      <p>
-        O estado operacional (pontuação, exclusões e ordem por dia) é salvo em UserProperties do Apps Script
-        na conta do usuário. O app também usa cache para informações de grupo e de usuário (nome/foto)
-        para reduzir chamadas de API.
-      </p>
+        <!-- English -->
+        <div x-show="lang === 'en'" x-cloak>
+          <h1 class="text-3xl font-bold text-neutral-900 mb-2">Help</h1>
+          <p class="text-neutral-600 mb-8">Last updated: March 2026</p>
 
-      <h2>Suporte</h2>
-      <p>
-        Suporte por e-mail: <strong>dailyify@decastro.me</strong>
-      </p>
-    </section>
+          <div class="space-y-8">
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Overview
+              </h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Dailyify is a Google Workspace application to organize your daily tasks. 
+                It helps you create, manage, and track your tasks with automatic reminders 
+                and Google Calendar™ sync.
+              </p>
+            </section>
 
-    <hr>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                How to use
+              </h2>
+              <ol class="list-decimal list-inside text-neutral-700 space-y-3">
+                <li>Install Dailyify from Google Workspace Marketplace</li>
+                <li>Open the app from the add-ons menu in Google Calendar™</li>
+                <li>Create your daily tasks</li>
+                <li>Set reminders and due dates</li>
+                <li>Get notifications and stay organized</li>
+              </ol>
+            </section>
 
-    <section lang="en">
-      <h1>Help - Dailyify</h1>
-      <p><strong>Last updated:</strong> March 11, 2026</p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Need help?
+              </h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                If you have questions or need support, contact us.
+              </p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-4 bg-primary-50 border border-primary-200 rounded-xl">
+                  <h3 class="font-medium text-primary-900 mb-2">Support Email</h3>
+                  <p class="text-primary-700">support@dailyify.app</p>
+                </div>
+                <div class="p-4 bg-neutral-50 border border-neutral-200 rounded-xl">
+                  <h3 class="font-medium text-neutral-900 mb-2">Availability</h3>
+                  <p class="text-neutral-700">Monday to Friday, 9AM-6PM (BRT)</p>
+                </div>
+              </div>
+            </section>
 
-      <h2>Overview</h2>
-      <p>
-        Dailyify is a Google Calendar add-on that organizes speaking order in recurring meetings
-        (such as daily stand-ups). It reads event guests, builds a participation order, and updates
-        a per-person score to balance who starts over time.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Install the App
+              </h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                To start using Dailyify, install it from Google Workspace Marketplace.
+              </p>
+              <a href="https://workspace.google.com/marketplace/app/dailyify" target="_blank" 
+                 class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors">
+                <span>Install on Google Workspace</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </section>
+          </div>
+        </div>
 
-      <h2>How the app works (high level)</h2>
-      <ul>
-        <li>When you open a Google Calendar event, Dailyify processes valid participants.</li>
-        <li>Group emails can be expanded into individual members when available in your domain.</li>
-        <li>The daily order is generated using score (lower score tends to speak first).</li>
-        <li>On first run for a meeting (or forced randomization), the initial order is shuffled.</li>
-        <li>After generating the order, the app updates score by position and may add a random +1 point (entropy).</li>
-        <li>Scores above 100 are reset to 0.</li>
-        <li>The order can be reused on the same day to avoid unexpected changes.</li>
-      </ul>
-
-      <h2>When to use</h2>
-      <ul>
-        <li>Daily/stand-up meetings with a fixed or semi-fixed team.</li>
-        <li>Recurring meetings where you want balanced opening turns.</li>
-        <li>Teams that want to avoid manual discussion about speaking order.</li>
-      </ul>
-
-      <h2>When not to use</h2>
-      <ul>
-        <li>Non-recurring meetings with no need for rotation.</li>
-        <li>Scenarios where order must always be manually fixed.</li>
-        <li>Flows that depend on external priority rules not represented by score.</li>
-      </ul>
-
-      <h2>How to use (step by step)</h2>
-      <ol>
-        <li>Open a meeting event in Google Calendar.</li>
-        <li>In the Dailyify panel, check <strong>Today’s Order</strong>.</li>
-        <li>If needed, move people to <strong>Optional/Assistants</strong> in <strong>Settings & Actions</strong>.</li>
-        <li>Use <strong>Simulate Next Day</strong> to test a score-based new order.</li>
-        <li>Use <strong>Force Randomization</strong> to reshuffle.</li>
-        <li>Use <strong>Reset Scores</strong>, <strong>Clear Meeting Data</strong>, or <strong>Global Flush</strong> only when needed.</li>
-      </ol>
-
-      <h2>Data and state</h2>
-      <p>
-        Operational state (scores, exclusions, and daily order) is saved in Apps Script UserProperties
-        under the user account. The app also uses cache for group and user info (name/photo)
-        to reduce API calls.
-      </p>
-
-      <h2>Support</h2>
-      <p>
-        Email-only support: <strong>dailyify@decastro.me</strong>
-      </p>
-    </section>
+      </div>
+    </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-900 text-neutral-400 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-sm">&copy; 2026 Dailyify. <span x-text="lang === 'en' ? 'All rights reserved.' : 'Todos os direitos reservados.'"></span></p>
+      <p class="text-xs mt-2 text-neutral-500">Google Chat™, Google Workspace™ e Google Calendar™ são marcas registradas da Google LLC.</p>
+    </div>
+  </footer>
 </body>
 </html>

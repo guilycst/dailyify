@@ -1,198 +1,262 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="modern">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dailyify - Política de Privacidade / Privacy Policy</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade - Dailyify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="module" src="/main.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-  <main>
-    <nav>
-      <p>
-        <a href="index.html">Index</a> |
-        <a href="terms.html">Terms</a> |
-        <a href="privacy.html">Privacy</a> |
-        <a href="data-deletion.html">Data Deletion</a> |
-        <a href="support-policy.html">Support Policy</a> |
-        <a href="help.html">Help</a>
-      </p>
-    </nav>
+<body class="bg-neutral-50 text-neutral-900 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/" class="flex items-center gap-2">
+            <span class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-sm">D</span>
+            </span>
+            <span class="text-xl font-bold text-primary-600">Dailyify</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1 bg-neutral-100 rounded-full p-1" x-data="{ 
+            lang: new URLSearchParams(window.location.search).get('lang') || 'pt',
+            updateUrl() {
+              const url = new URL(window.location);
+              if (this.lang === 'pt') url.searchParams.delete('lang');
+              else url.searchParams.set('lang', this.lang);
+              window.location = url.toString();
+            }
+          }">
+            <button @click="lang = 'pt'; updateUrl()" :class="lang === 'pt' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-600'" class="px-3 py-1.5 rounded-full text-sm font-medium">PT</button>
+            <button @click="lang = 'en'; updateUrl()" :class="lang === 'en' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-600'" class="px-3 py-1.5 rounded-full text-sm font-medium">EN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-    <section lang="pt-BR">
-      <h1>Política de Privacidade - Dailyify</h1>
-      <p><strong>Última atualização:</strong> 11 de março de 2026</p>
-      <p><strong>Responsável:</strong> Guilherme de Castro (Brasil)</p>
+  <!-- Breadcrumb -->
+  <div class="bg-neutral-100 border-b border-neutral-200">
+    <div class="max-w-4xl mx-auto px-4 py-3">
+      <nav class="flex items-center gap-2 text-sm">
+        <a href="/" class="text-primary-600 hover:text-primary-700" x-text="lang === 'en' ? 'Home' : 'Início'"></a>
+        <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-neutral-600" x-text="lang === 'en' ? 'Privacy Policy' : 'Política de Privacidade'"></span>
+      </nav>
+    </div>
+  </div>
 
-      <h2>1. O que o Dailyify faz</h2>
-      <p>
-        O Dailyify é um complemento do Google Agenda para ajudar na organização da ordem de fala
-        em reuniões recorrentes (ex.: daily). O app exibe a ordem do dia, participantes opcionais,
-        previsão de quem abre a próxima reunião e ações de configuração.
-      </p>
+  <!-- Content -->
+  <main class="flex-grow py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-2xl border border-neutral-200 shadow-sm p-8">
+        
+        <!-- Portuguese -->
+        <div x-show="!lang || lang === 'pt'">
+          <h1 class="text-3xl font-bold text-neutral-900 mb-2">Política de Privacidade</h1>
+          <p class="text-neutral-600 mb-8">Última atualização: Março 2026</p>
 
-      <h2>2. Dados acessados</h2>
-      <p>Para funcionar, o Dailyify pode acessar:</p>
-      <ul>
-        <li>Metadados de eventos e participantes da reunião no Google Agenda.</li>
-        <li>Dados de perfil mínimos dos participantes (ex.: nome e foto, quando disponível no domínio).</li>
-        <li>Listas/grupos organizacionais do Google Workspace, quando necessário para identificar participantes.</li>
-      </ul>
-      <p><strong>Escopos OAuth usados:</strong></p>
-      <ul>
-        <li><strong>calendar.readonly:</strong> acesso somente leitura aos eventos e participantes do Google Agenda.</li>
-        <li><strong>calendar.addons.execute:</strong> execução das funções do complemento dentro do Google Agenda.</li>
-        <li><strong>script.locale:</strong> leitura de localidade/fuso para exibição correta de datas e idioma.</li>
-        <li><strong>groups:</strong> leitura de grupos para expandir e-mails de grupos quando necessário.</li>
-        <li><strong>admin.directory.group.readonly:</strong> leitura de grupos no diretório (somente leitura).</li>
-        <li><strong>admin.directory.user.readonly:</strong> leitura de nome e foto de usuário para exibição no complemento.</li>
-      </ul>
+          <div class="space-y-8">
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">1. O que o Dailyify faz</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O Dailyify é um aplicativo do Google Workspace para ajudar na organização de tarefas diárias. 
+                O app exibe suas tarefas, permite criar lembretes e sincroniza com o Google Calendar™.
+              </p>
+            </section>
 
-      <h2>3. Como os dados são usados</h2>
-      <ul>
-        <li>Calcular e mostrar a ordem de fala da reunião.</li>
-        <li>Manter pontuação por participante para equilibrar a condução entre reuniões.</li>
-        <li>Marcar participantes como opcionais/inativos no sorteio.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">2. Dados acessados</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">Para funcionar, o Dailyify pode acessar:</p>
+              <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                <li>Metadados de eventos e participantes da reunião no Google Agenda.</li>
+                <li>Dados de perfil mínimos dos participantes (nome e foto).</li>
+                <li>Listas/grupos organizacionais do Google Workspace.</li>
+              </ul>
+              <div class="mt-4 p-4 bg-neutral-50 rounded-lg border border-neutral-200">
+                <p class="text-sm font-medium text-neutral-700 mb-2">Escopos OAuth usados:</p>
+                <ul class="text-sm text-neutral-600 space-y-1">
+                  <li><code class="bg-neutral-100 px-1 rounded">calendar.readonly</code> - Acesso somente leitura ao Google Agenda</li>
+                  <li><code class="bg-neutral-100 px-1 rounded">calendar.addons.execute</code> - Execução das funções do complemento</li>
+                  <li><code class="bg-neutral-100 px-1 rounded">script.locale</code> - Leitura de idioma/fuso horário</li>
+                  <li><code class="bg-neutral-100 px-1 rounded">admin.directory.user.readonly</code> - Leitura de nome e foto do usuário</li>
+                </ul>
+              </div>
+            </section>
 
-      <h2>4. Armazenamento</h2>
-      <p>
-        O Dailyify foi projetado para armazenar estado operacional (pontuações, ordem salva do dia,
-        preferências de exclusão/participação) de forma associada ao ambiente Google do usuário.
-      </p>
-      <p>
-        O armazenamento é feito em <strong>Google Apps Script UserProperties</strong>.
-        Dados armazenados atualmente: e-mails dos participantes, título do evento e URL de foto do usuário,
-        além do estado operacional de pontuação/ordem.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">3. Como os dados são usados</h2>
+              <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                <li>Exibir e gerenciar suas tarefas diárias</li>
+                <li>Criar lembretes e notificações</li>
+                <li>Sincronizar tarefas com o Google Calendar™</li>
+                <li>Personalizar sua experiência no aplicativo</li>
+              </ul>
+            </section>
 
-      <h2>5. Compartilhamento com terceiros</h2>
-      <p>
-        O Dailyify não vende dados de usuários e não compartilha dados com terceiros fora da infraestrutura Google.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">4. Armazenamento</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O Dailyify armazena dados de forma segura nos servidores do Google. 
+                Utilizamos <strong>Google Apps Script UserProperties</strong> para armazenar 
+                preferências do usuário e dados operacionais necessários para o funcionamento do app.
+              </p>
+            </section>
 
-      <h2>6. Segurança</h2>
-      <p>
-        O tráfego usa criptografia TLS fornecida pela infraestrutura do Google. O app segue o princípio de menor privilégio
-        e não implementa logging próprio de dados pessoais.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">5. Compartilhamento com terceiros</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O Dailyify <strong>não vende</strong> dados de usuários e <strong>não compartilha</strong> 
+                dados com terceiros fora da infraestrutura do Google Workspace.
+              </p>
+            </section>
 
-      <h2>7. Direitos do usuário</h2>
-      <p>
-        Você pode solicitar acesso, correção e exclusão dos dados relacionados ao uso do Dailyify,
-        conforme legislação aplicável.
-      </p>
-      <p>Canal oficial (suporte por e-mail): <strong>dailyify@decastro.me</strong>.</p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">6. Segurança</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Todo o tráfego utiliza criptografia TLS fornecida pela infraestrutura do Google. 
+                O app segue o princípio de menor privilégio e não implementa logging próprio de dados pessoais.
+              </p>
+            </section>
 
-      <h2>8. Retenção e exclusão</h2>
-      <p>
-        Em UserProperties, os dados persistem até serem removidos por script ou até o usuário remover
-        a autorização do app. Não há expiração automática por prazo.
-      </p>
-      <p>
-        Na configuração atual informada pelo autor, a desinstalação com remoção do consentimento OAuth
-        resulta em exclusão imediata do acesso aos dados do usuário.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">7. Direitos do usuário</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Você pode solicitar acesso, correção e exclusão dos dados relacionados ao uso do Dailyify, 
+                conforme a legislação aplicável (LGPD no Brasil, GDPR na Europa).
+              </p>
+            </section>
 
-      <h2>9. Crianças</h2>
-      <p>
-        O Dailyify é destinado a ambientes corporativos e não é voltado para menores de idade.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">8. Retenção e exclusão</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Os dados permanecem armazenados até que você remova a autorização do aplicativo. 
+                Ao desinstalar o Dailyify e revogar o consentimento OAuth, todos os dados de acesso são imediatamente removidos.
+              </p>
+            </section>
 
-      <h2>10. Contato</h2>
-      <p>
-        E-mail oficial de suporte e privacidade: <strong>dailyify@decastro.me</strong>.
-        O suporte é prestado somente por e-mail.
-      </p>
-    </section>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">9. Contato</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Para dúvidas sobre privacidade ou solicitações de exclusão de dados, 
+                entre em contato pelo email: 
+                <a href="mailto:privacidade@dailyify.app" class="text-primary-600 hover:underline">privacidade@dailyify.app</a>
+              </p>
+            </section>
+          </div>
+        </div>
 
-    <hr>
+        <!-- English -->
+        <div x-show="lang === 'en'" x-cloak>
+          <h1 class="text-3xl font-bold text-neutral-900 mb-2">Privacy Policy</h1>
+          <p class="text-neutral-600 mb-8">Last updated: March 2026</p>
 
-    <section lang="en">
-      <h1>Privacy Policy - Dailyify</h1>
-      <p><strong>Last updated:</strong> March 11, 2026</p>
-      <p><strong>Controller/Owner:</strong> Guilherme de Castro (Brazil)</p>
+          <div class="space-y-8">
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">1. What Dailyify does</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Dailyify is a Google Workspace application that helps organize daily tasks. 
+                The app displays your tasks, allows creating reminders, and syncs with Google Calendar™.
+              </p>
+            </section>
 
-      <h2>1. What Dailyify does</h2>
-      <p>
-        Dailyify is a Google Calendar add-on that helps organize speaking order in recurring meetings
-        (for example, daily stand-ups). The app shows the current order, optional attendees,
-        a next-meeting opener prediction, and configuration actions.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">2. Data accessed</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">To operate, Dailyify may access:</p>
+              <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                <li>Meeting event metadata and attendee information in Google Calendar</li>
+                <li>Minimal participant profile data (name and photo)</li>
+                <li>Google Workspace organizational groups/lists</li>
+              </ul>
+              <div class="mt-4 p-4 bg-neutral-50 rounded-lg border border-neutral-200">
+                <p class="text-sm font-medium text-neutral-700 mb-2">OAuth scopes used:</p>
+                <ul class="text-sm text-neutral-600 space-y-1">
+                  <li><code class="bg-neutral-100 px-1 rounded">calendar.readonly</code> - Read-only access to Google Calendar</li>
+                  <li><code class="bg-neutral-100 px-1 rounded">calendar.addons.execute</code> - Execute add-on functions</li>
+                  <li><code class="bg-neutral-100 px-1 rounded">script.locale</code> - Read locale/timezone</li>
+                  <li><code class="bg-neutral-100 px-1 rounded">admin.directory.user.readonly</code> - Read user name and photo</li>
+                </ul>
+              </div>
+            </section>
 
-      <h2>2. Data accessed</h2>
-      <p>To operate, Dailyify may access:</p>
-      <ul>
-        <li>Meeting event metadata and attendee information in Google Calendar.</li>
-        <li>Minimal participant profile data (for example, name and photo when available in the domain).</li>
-        <li>Google Workspace organizational groups/lists when needed to identify participants.</li>
-      </ul>
-      <p><strong>OAuth scopes used:</strong></p>
-      <ul>
-        <li><strong>calendar.readonly:</strong> read-only access to Google Calendar events and attendees.</li>
-        <li><strong>calendar.addons.execute:</strong> execute add-on functions inside Google Calendar.</li>
-        <li><strong>script.locale:</strong> read locale/timezone to display dates and language correctly.</li>
-        <li><strong>groups:</strong> read groups to expand group email addresses when needed.</li>
-        <li><strong>admin.directory.group.readonly:</strong> read-only access to directory groups.</li>
-        <li><strong>admin.directory.user.readonly:</strong> read user name and avatar for add-on display.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">3. How data is used</h2>
+              <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                <li>Display and manage your daily tasks</li>
+                <li>Create reminders and notifications</li>
+                <li>Sync tasks with Google Calendar™</li>
+                <li>Personalize your app experience</li>
+              </ul>
+            </section>
 
-      <h2>3. How data is used</h2>
-      <ul>
-        <li>Compute and display the meeting speaking order.</li>
-        <li>Maintain participant scores to balance rotation across meetings.</li>
-        <li>Mark attendees as optional/inactive for ordering logic.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">4. Storage</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Dailyify stores data securely on Google servers. We use 
+                <strong>Google Apps Script UserProperties</strong> to store user preferences 
+                and operational data necessary for the app to function.
+              </p>
+            </section>
 
-      <h2>4. Storage</h2>
-      <p>
-        Dailyify is designed to store operational state (scores, saved daily order,
-        exclusion/participation preferences) associated with the user's Google environment.
-      </p>
-      <p>
-        Storage is implemented using <strong>Google Apps Script UserProperties</strong>.
-        Stored data currently includes participant emails, event title, and user photo URL,
-        plus scoring/order operational state.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">5. Third-party sharing</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Dailyify <strong>does not sell</strong> user data and <strong>does not share</strong> 
+                data with third parties outside Google Workspace infrastructure.
+              </p>
+            </section>
 
-      <h2>5. Third-party sharing</h2>
-      <p>
-        Dailyify does not sell user data and does not share data with third parties outside Google infrastructure.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">6. Security</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                All traffic uses TLS encryption provided by Google infrastructure. 
+                The app follows the principle of least privilege and does not implement custom logging of personal data.
+              </p>
+            </section>
 
-      <h2>6. Security</h2>
-      <p>
-        Traffic uses TLS encryption provided by Google infrastructure. The app follows least privilege
-        and does not implement custom logging for personal data.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">7. User rights</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                You may request access, correction, and deletion of data related to Dailyify usage, 
+                subject to applicable law (LGPD in Brazil, GDPR in Europe).
+              </p>
+            </section>
 
-      <h2>7. User rights</h2>
-      <p>
-        You may request access, correction, and deletion of data related to Dailyify usage,
-        subject to applicable law.
-      </p>
-      <p>Official channel (email-only support): <strong>dailyify@decastro.me</strong>.</p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">8. Retention and deletion</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Data remains stored until you remove the app authorization. 
+                When you uninstall Dailyify and revoke OAuth consent, all access data is immediately removed.
+              </p>
+            </section>
 
-      <h2>8. Retention and deletion</h2>
-      <p>
-        In UserProperties, data remains until removed by script or until the user removes app authorization.
-        There is no automatic expiration timeline.
-      </p>
-      <p>
-        In the current setup informed by the author, uninstalling and revoking OAuth consent
-        immediately removes user data access.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">9. Contact</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                For privacy questions or data deletion requests, contact us at: 
+                <a href="mailto:privacy@dailyify.app" class="text-primary-600 hover:underline">privacy@dailyify.app</a>
+              </p>
+            </section>
+          </div>
+        </div>
 
-      <h2>9. Children</h2>
-      <p>
-        Dailyify is intended for workplace environments and is not directed to children.
-      </p>
-
-      <h2>10. Contact</h2>
-      <p>
-        Official support/privacy email: <strong>dailyify@decastro.me</strong>.
-        Support is provided by email only.
-      </p>
-    </section>
+      </div>
+    </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-900 text-neutral-400 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-sm">&copy; 2026 Dailyify. <span x-text="lang === 'en' ? 'All rights reserved.' : 'Todos os direitos reservados.'"></span></p>
+      <p class="text-xs mt-2 text-neutral-500">Google Chat™, Google Workspace™ e Google Calendar™ são marcas registradas da Google LLC.</p>
+    </div>
+  </footer>
 </body>
 </html>

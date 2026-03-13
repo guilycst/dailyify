@@ -1,116 +1,211 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="modern">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dailyify - Terms of Service</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termos de Serviço - Dailyify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="module" src="/main.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-  <main>
-    <nav>
-      <p>
-        <a href="index.html">Index</a> |
-        <a href="terms.html">Terms</a> |
-        <a href="privacy.html">Privacy</a> |
-        <a href="data-deletion.html">Data Deletion</a> |
-        <a href="support-policy.html">Support Policy</a> |
-        <a href="help.html">Help</a>
-      </p>
-    </nav>
+<body class="bg-neutral-50 text-neutral-900 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/" class="flex items-center gap-2">
+            <span class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-sm">D</span>
+            </span>
+            <span class="text-xl font-bold text-primary-600">Dailyify</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1 bg-neutral-100 rounded-full p-1" x-data="{ 
+            lang: new URLSearchParams(window.location.search).get('lang') || 'pt',
+            updateUrl() {
+              const url = new URL(window.location);
+              if (this.lang === 'pt') url.searchParams.delete('lang');
+              else url.searchParams.set('lang', this.lang);
+              window.location = url.toString();
+            }
+          }">
+            <button @click="lang = 'pt'; updateUrl()" :class="lang === 'pt' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-600'" class="px-3 py-1.5 rounded-full text-sm font-medium">PT</button>
+            <button @click="lang = 'en'; updateUrl()" :class="lang === 'en' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-600'" class="px-3 py-1.5 rounded-full text-sm font-medium">EN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-    <section lang="pt-BR">
-      <h1>Termos de Serviço - Dailyify</h1>
-      <p><strong>Última atualização:</strong> 11 de março de 2026</p>
-      <p>
-        Ao utilizar o complemento Dailyify ("o Aplicativo"), você concorda com os termos abaixo.
-        Se você não concorda, desinstale o complemento.
-      </p>
+  <!-- Breadcrumb -->
+  <div class="bg-neutral-100 border-b border-neutral-200">
+    <div class="max-w-4xl mx-auto px-4 py-3">
+      <nav class="flex items-center gap-2 text-sm">
+        <a href="/" class="text-primary-600 hover:text-primary-700" x-text="lang === 'en' ? 'Home' : 'Início'"></a>
+        <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-neutral-600" x-text="lang === 'en' ? 'Terms of Service' : 'Termos de Serviço'"></span>
+      </nav>
+    </div>
+  </div>
 
-      <h2>1. Licença e Custo</h2>
-      <p>
-        O Dailyify é fornecido de forma totalmente gratuita. Não há cobranças, assinaturas ou
-        recursos "Premium" ocultos. O autor concede a você o direito de usar o app para
-        organizar suas reuniões.
-      </p>
+  <!-- Content -->
+  <main class="flex-grow py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-2xl border border-neutral-200 shadow-sm p-8">
+        
+        <!-- Portuguese -->
+        <div x-show="!lang || lang === 'pt'">
+          <h1 class="text-3xl font-bold text-neutral-900 mb-6">Termos de Serviço</h1>
+          <p class="text-neutral-600 mb-8">Última atualização: Março 2026</p>
 
-      <h2>2. Natureza do Serviço ("AS IS")</h2>
-      <p>Este software é fornecido "no estado em que se encontra" ("as is"). Isso significa que:</p>
-      <ul>
-        <li><strong>Sem Garantias:</strong> O autor não garante que o app estará disponível 24/7, que não terá bugs ou que a lógica de pontuação será considerada "justa" por todos os membros da sua equipe.</li>
-        <li><strong>Uso por sua conta e risco:</strong> Você usa o app por sua conta e risco, sem obrigação de resultado por parte do autor.</li>
-      </ul>
+          <div class="space-y-8">
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">1. Aceitação dos Termos</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Ao acessar e usar o Dailyify, você aceita e concorda em cumprir estes Termos de Serviço. 
+                Se você não concordar com qualquer parte destes termos, não deverá usar nosso serviço.
+              </p>
+            </section>
 
-      <h2>3. Isenção Total de Responsabilidade</h2>
-      <p>Em nenhuma circunstância o autor será responsável por qualquer dano, incluindo, mas não se limitando a:</p>
-      <ul>
-        <li>Perda de dados ou configurações.</li>
-        <li>Atrasos em projetos ou prazos.</li>
-        <li>Discussões acaloradas sobre a ordem de fala.</li>
-        <li>Falhas técnicas causadas por mudanças nas APIs do Google Workspace.</li>
-      </ul>
-      <p>O suporte é opcional, sem SLA e sem garantia de correção de erros. Quando disponível, é feito somente por e-mail: <strong>dailyify@decastro.me</strong>.</p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">2. Descrição do Serviço</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O Dailyify é um aplicativo de gerenciamento de tarefas diárias integrado ao Google Workspace. 
+                Nosso serviço permite que você organize suas tarefas, defina lembretes e sincronize seus 
+                compromissos com o Google Calendar™.
+              </p>
+            </section>
 
-      <h2>4. Privacidade e Dados</h2>
-      <p>O Dailyify foi desenhado com foco em privacidade:</p>
-      <ul>
-        <li><strong>Armazenamento Local:</strong> Todos os dados (scores e preferências) são salvos exclusivamente no seu UserProperties dentro da infraestrutura do Google.</li>
-        <li><strong>Acesso do Autor:</strong> O autor não tem acesso aos seus dados, aos e-mails dos seus participantes ou às suas reuniões. Tudo o que acontece no Dailyify, fica no seu Google Agenda.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">3. Uso do Serviço</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">Você concorda em:</p>
+              <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                <li>Usar o serviço apenas para fins legais</li>
+                <li>Não tentar interferir no funcionamento do serviço</li>
+                <li>Não copiar ou distribuir conteúdo protegido por direitos autorais</li>
+                <li>Manter suas credenciais de acesso confidenciais</li>
+              </ul>
+            </section>
 
-      <h2>5. Alterações e Descontinuação</h2>
-      <p>
-        O autor reserva-se o direito de modificar o código ou descontinuar o Aplicativo a qualquer
-        momento, sem aviso prévio. Como o app é gratuito, não há obrigação de manutenção ou atualização.
-      </p>
-    </section>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">4. Propriedade Intelectual</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O Dailyify e todo o seu conteúdo, incluindo textos, gráficos, logotipos e código, são 
+                propriedade da Dailyify ou de seus licenciantes e são protegidos por leis de direitos autorais.
+              </p>
+            </section>
 
-    <hr>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">5. Limitação de Responsabilidade</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                O serviço é fornecido "como está". Não garantimos que o serviço será ininterrupto, 
+                seguro ou livre de erros. Não seremos responsáveis por quaisquer danos indiretos, 
+                incidentais ou consequenciais.
+              </p>
+            </section>
 
-    <section lang="en">
-      <h1>Terms of Service - Dailyify</h1>
-      <p><strong>Last updated:</strong> March 11, 2026</p>
-      <p>
-        By using the Dailyify add-on (the "App"), you agree to the terms below.
-        If you do not agree, uninstall the add-on.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">6. Modificações</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Reservamos o direito de modificar estes termos a qualquer momento. Alterações serão 
+                publicadas nesta página. Seu uso contínuo do serviço após alterações constitui aceitação 
+                dos novos termos.
+              </p>
+            </section>
 
-      <h2>1. License and Cost</h2>
-      <p>
-        Dailyify is provided completely free of charge. There are no fees, subscriptions,
-        or hidden "Premium" features. The author grants you the right to use the app to
-        organize your meetings.
-      </p>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">7. Contato</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Para dúvidas sobre estes termos, entre em contato pelo email: 
+                <a href="mailto:suporte@dailyify.app" class="text-primary-600 hover:underline">suporte@dailyify.app</a>
+              </p>
+            </section>
+          </div>
+        </div>
 
-      <h2>2. Nature of the Service ("AS IS")</h2>
-      <p>This software is provided "as is". This means:</p>
-      <ul>
-        <li><strong>No Warranties:</strong> The author does not guarantee that the app will be available 24/7, free of bugs, or that the scoring logic will be considered "fair" by every member of your team.</li>
-        <li><strong>Use at your own risk:</strong> You use the app at your own risk, with no obligation of results from the author.</li>
-      </ul>
+        <!-- English -->
+        <div x-show="lang === 'en'" x-cloak>
+          <h1 class="text-3xl font-bold text-neutral-900 mb-6">Terms of Service</h1>
+          <p class="text-neutral-600 mb-8">Last updated: March 2026</p>
 
-      <h2>3. Full Disclaimer of Liability</h2>
-      <p>Under no circumstances shall the author be liable for any damages, including but not limited to:</p>
-      <ul>
-        <li>Loss of data or settings.</li>
-        <li>Project or deadline delays.</li>
-        <li>Heated discussions about speaking order.</li>
-        <li>Technical failures caused by changes in Google Workspace APIs.</li>
-      </ul>
-      <p>Support is optional, with no SLA and no guarantee of bug fixes. When available, support is provided by email only: <strong>dailyify@decastro.me</strong>.</p>
+          <div class="space-y-8">
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">1. Acceptance of Terms</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                By accessing and using Dailyify, you accept and agree to comply with these Terms of Service. 
+                If you do not agree to any part of these terms, you should not use our service.
+              </p>
+            </section>
 
-      <h2>4. Privacy and Data</h2>
-      <p>Dailyify is designed with privacy in mind:</p>
-      <ul>
-        <li><strong>Local Storage:</strong> All data (scores and preferences) is stored exclusively in your UserProperties within Google infrastructure.</li>
-        <li><strong>Author Access:</strong> The author has no access to your data, your participants' emails, or your meetings. What happens in Dailyify stays in your Google Calendar.</li>
-      </ul>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">2. Service Description</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Dailyify is a daily task management application integrated with Google Workspace. 
+                Our service allows you to organize your tasks, set reminders, and sync your 
+                appointments with Google Calendar™.
+              </p>
+            </section>
 
-      <h2>5. Changes and Discontinuation</h2>
-      <p>
-        The author reserves the right to modify the code or discontinue the App at any time,
-        without prior notice. Since the app is free, there is no maintenance or update obligation.
-      </p>
-    </section>
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">3. Use of Service</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">You agree to:</p>
+              <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                <li>Use the service only for lawful purposes</li>
+                <li>Not attempt to interfere with the operation of the service</li>
+                <li>Not copy or distribute copyrighted content</li>
+                <li>Keep your access credentials confidential</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">4. Intellectual Property</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Dailyify and all its content, including text, graphics, logos, and code, are 
+                property of Dailyify or its licensors and are protected by copyright laws.
+              </p>
+            </section>
+
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">5. Limitation of Liability</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                The service is provided "as is". We do not guarantee that the service will be uninterrupted, 
+                secure, or error-free. We will not be liable for any indirect, incidental, or consequential damages.
+              </p>
+            </section>
+
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">6. Modifications</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                We reserve the right to modify these terms at any time. Changes will be 
+                posted on this page. Your continued use of the service after changes constitutes acceptance of the new terms.
+              </p>
+            </section>
+
+            <section>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-3">7. Contact</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                For questions about these terms, contact us at: 
+                <a href="mailto:support@dailyify.app" class="text-primary-600 hover:underline">support@dailyify.app</a>
+              </p>
+            </section>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-900 text-neutral-400 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-sm">&copy; 2026 Dailyify. <span x-text="lang === 'en' ? 'All rights reserved.' : 'Todos os direitos reservados.'"></span></p>
+      <p class="text-xs mt-2 text-neutral-500">Google Chat™, Google Workspace™ e Google Calendar™ são marcas registradas da Google LLC.</p>
+    </div>
+  </footer>
 </body>
 </html>
